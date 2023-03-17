@@ -7,5 +7,8 @@ import { Cats } from './test.entity';
   imports:[TypeOrmModule.forFeature([Cats])],
   controllers: [CatsController],
   providers: [CatsService],
+  exports: [CatsService],
 })
-export class CatsModule {}
+export class CatsModule {
+  constructor(private readonly catsService: CatsService) {}
+}

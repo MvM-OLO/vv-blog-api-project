@@ -15,7 +15,7 @@ export class CatsService {
     return await this.catsRepository.find();
   }
 
-  async findOne(id: number): Promise<Cats> {
+  async findOne(id: any): Promise<Cats> {
     //@ts-ignore
     return await this.catsRepository.findOne(id);
     

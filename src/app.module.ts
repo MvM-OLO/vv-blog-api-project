@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { CatsModule } from './test/test.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Cats } from './test/test.entity';
+import { UsersModule } from './users/users.module';
 @Module({
   imports: [CatsModule,
     TypeOrmModule.forRoot({
@@ -15,7 +16,8 @@ import { Cats } from './test/test.entity';
       database: 'test',
       entities: [Cats],
       synchronize: true,
-    })
+    }),
+    UsersModule
   ],
   controllers: [AppController],
   providers: [AppService],
