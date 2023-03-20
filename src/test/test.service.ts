@@ -11,16 +11,15 @@ export class CatsService {
     private catsRepository: Repository<Cats>
   ) {}
 
-  async findAll(): Promise<Cats[]> {
-    return await this.catsRepository.find();
-  }
-
-  async findOne(id: any): Promise<Cats> {
-    //@ts-ignore
-    return await this.catsRepository.findOne(id);
-    
+  async find(query): Promise<Cats[]|Cats> {
+    return await this.catsRepository.find(
+      {where:{...query}}
+    );
   }
   async remove(id: number): Promise<void> {
     await this.catsRepository.delete(id);
+  }
+   add(cats: Cats) {
+    this.catsRepository.create(cats);
   }
 }

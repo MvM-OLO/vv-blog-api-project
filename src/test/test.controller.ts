@@ -1,25 +1,24 @@
 import { Controller, Get, Post,Param,Delete, Query } from '@nestjs/common';
 import { CatsService } from './test.service';
 import { Cats } from './test.entity';
+import { query } from 'express';
 
 @Controller('vv-blog/cats')
 export class CatsController {
 
    constructor(private catsService: CatsService) {}
 
-   
   @Get()
-  findAll(): Promise<Cats[]> {
-    return this.catsService.findAll();
+  findOne(@Query() query): Promise<Cats[]|Cats> {  
+    return this.catsService.find(query);
   }
 
-  @Get(':id')
-  findOne(@Query('id') id: number): Promise<Cats> {
-    return this.catsService.findOne(id);
+  @Delete()
+  remove(@Query() query){
+    return this.catsService.remove(query.id);
   }
-
-  @Delete(':id')
-  remove(@Param('id') id:number){
-    return this.catsService.remove(id);
+  @Post()
+  add(@Query() query){
+    return this.catsService.add(query);
   }
 }
