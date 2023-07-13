@@ -4,7 +4,9 @@ import { AppService } from './app.service';
 import { CatsModule } from './test/test.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Cats } from './test/test.entity';
+import { SystemInfoEntity } from './server/config/config.entity';
 import { UsersModule } from './users/users.module';
+import { ConfigModule } from './server/config/config.module';
 @Module({
   imports: [CatsModule,
     TypeOrmModule.forRoot({
@@ -14,10 +16,11 @@ import { UsersModule } from './users/users.module';
       username: 'root',
       password: '123456',
       database: 'test',
-      entities: [Cats],
+      entities: [Cats,SystemInfoEntity],
       synchronize: true,
     }),
-    UsersModule
+    UsersModule,
+    ConfigModule
   ],
   controllers: [AppController],
   providers: [AppService],
